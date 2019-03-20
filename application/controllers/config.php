@@ -7,6 +7,7 @@ class Config extends CI_Controller {
 		parent::__construct();
 		$this->load->library('grocery_CRUD');
 		$this->load->library('OutputView');
+		$this->load->helper('tglIndo');
     }
  	
     public function index()
@@ -35,26 +36,40 @@ class Config extends CI_Controller {
 	}
 
     //USERS MANAGEMENT
-    public function users()
-    {
+    public function users(){
+
     	$crud = new grocery_CRUD();
 
     	$crud->set_table('users');
-    	$crud->set_subject('Users');
+    	$crud->set_subject('Pengguna Sistem');
     	$crud->columns('username','email','groups','active');
+    	$crud->display_as('identity_number','No. Identitas');
+    	$crud->display_as('username','Nama Pengguna');
+    	$crud->display_as('groups','Hak Akses');
+    	$crud->display_as('active','Status Akun');
+    	$crud->display_as('first_name','Nama Depan');
+    	$crud->display_as('last_name','Nama Belakang');
+    	$crud->display_as('place_of_birth','Tempat Lahir');
+    	$crud->display_as('date_of_birth','Tanggal Lahir');
+    	$crud->display_as('phone','No. Telepon');
+    	$crud->display_as('password','Kata Sandi');
+    	$crud->display_as('password_confirm','Konfirmasi Kata Sandi');
+    	$crud->display_as('old_password','Kata Sandi Lama');
+    	$crud->display_as('new_password', 'Kata Sandi Baru');
     	if ($this->uri->segment(3) !== 'read')
 		{
-	    	$crud->add_fields('username','first_name', 'last_name', 'email', 'phone','groups' , 'password', 'password_confirm');
-			$crud->edit_fields('username','first_name', 'last_name', 'email', 'phone','groups' , 'last_login','old_password','new_password');
+	    	$crud->add_fields('identity_number','first_name', 'last_name', 'place_of_birth', 'date_of_birth', 'email', 'phone','groups' ,'username', 'password', 'password_confirm');
+			$crud->edit_fields('identity_number','username','first_name', 'last_name' , 'place_of_birth', 'date_of_birth', 'email', 'phone','groups' , 'last_login','old_password','new_password');
 		}else{
-			$crud->set_read_fields('username','first_name', 'last_name', 'email', 'phone','groups', 'last_login');
+			$crud->set_read_fields('identity_number','first_name','last_name', 'place_of_birth', 'date_of_birth', 'email', 'groups');
 		}
 		$crud->set_relation_n_n('groups', 'users_groups', 'groups', 'user_id', 'group_id', 'name');
 
 		//VALIDATION
-		$crud->required_fields('username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
+		$crud->required_fields('identity_number','username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
 		$crud->set_rules('email', 'E-mail', 'required|valid_email');
-		$crud->set_rules('phone', 'Phone', 'required|numeric');
+		$crud->set_rules('phone', 'No. Telepon', 'required|numeric|min_length[12]');
+		$crud->set_rules('identity_number', 'No. Identitas','required|numeric|min_length[' . $this->config->item('identity_number_min_length', 'ion_auth') . ']|max_length[' . $this->config->item('identity_number_max_length', 'ion_auth') . ']');
 		$crud->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
    		$crud->set_rules('new_password', 'New password', 'min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
 
@@ -69,6 +84,7 @@ class Config extends CI_Controller {
 		$crud->callback_insert(array($this, 'create_user_callback'));
 		$crud->callback_update(array($this, 'edit_user_callback'));
 		$crud->callback_field('last_login',array($this,'last_login_callback'));
+		$crud->callback_column('date_of_birth',array($this,'date_of_birth_callback'));
 		$crud->callback_column('active',array($this,'active_callback'));
 
 		//VIEW
@@ -100,9 +116,9 @@ class Config extends CI_Controller {
 	function active_callback($value, $row)
 	{
 		if ($value == 1) {
-			$val = 'active';
+			$val = '<span class="m-badge m-badge--success m-badge--wide">Aktif</span>';
 		}else{
-			$val = 'inactive';
+			$val = '<span class="m-badge m-badge--danger m-badge--wide">Nonaktif</span>';
 		}
 		return "<a href='".site_url('config/activate/'.$row->id.'/'.$value)."'>$val</a>";
 	}
@@ -122,6 +138,11 @@ class Config extends CI_Controller {
 	{
 		$value = date('l Y/m/d H:i', $value);
 	    return $value;
+	}
+
+	function date_of_birth_callback($value = '', $primary_key = null){
+		$value = shortdate_indo($value);
+		return $value;
 	}
 
 	function delete_user($primary_key) {

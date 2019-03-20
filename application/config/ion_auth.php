@@ -81,17 +81,21 @@ $config['salt_prefix']    = '$2y$';
  | The controller should check this function and act
  | appropriately. If this variable set to 0, there is no maximum.
  */
-$config['site_title']                 = "Example.com";       // Site Title, example.com
-$config['admin_email']                = "admin@example.com"; // Admin Email, admin@example.com
+$config['site_title']                 = "tabunganku.net";       // Site Title, example.com
+$config['admin_email']                = "admin@smkikakartika.sch.id"; // Admin Email, admin@example.com
 $config['default_group']              = 'members';           // Default group, use name
 $config['admin_group']                = 'admin';             // Default administrators group, use name
-$config['identity']                   = 'email';             // A database column which is used to login with
+$config['identity']                   = 'username';             // A database column which is used to login with
+//IDENTITY-NUMBER---------------------------------------------------------------------------------------------
+$config['identity_number_min_length'] = '16';	
+$config['identity_number_max_length'] = '16';	
+//------------------------------------------------------------------------------------------------------------				
 $config['min_password_length']        = 8;                   // Minimum Required Length of Password
 $config['max_password_length']        = 20;                  // Maximum Allowed Length of Password
 $config['email_activation']           = FALSE;               // Email Activation for registration
-$config['manual_activation']          = FALSE;               // Manual Activation for registration
+$config['manual_activation']          = TRUE;               // Manual Activation for registration
 $config['remember_users']             = TRUE;                // Allow users to be remembered and enable auto-login
-$config['user_expire']                = 86500;               // How long to remember the user (seconds). Set to zero for no expiration
+$config['user_expire']                = 3600;               // How long to remember the user (seconds). Set to zero for no expiration
 $config['user_extend_on_login']       = FALSE;               // Extend the users cookies every time they auto-login
 $config['track_login_attempts']       = FALSE;               // Track the number of failed login attempts for each user or ip.
 $config['track_login_ip_address']     = TRUE;                // Track login attempts by IP Address, if FALSE will track based on identity. (Default: TRUE)
