@@ -7,11 +7,6 @@
                             </div>
                             <div class="m-alert__text">
                                 Selamat datang GarutorCRUD, dibawah ini adalah contoh tabel bawaan dari template metronic dengan tipe metronic html table yang dimana tabel html dapat otomatis menjadi serverside, anda dapat menyesuaikan dengan halaman-halaman lain.
-                                test branch
-                                dsalkdfadlfkjadfda
-                                dlaksdjfadlfkjafd
-                                a;dlkfjasdflkjsalkdfasfd
-                                
                             </div>
                         </div>
                         <div class="m-portlet m-portlet--mobile">
