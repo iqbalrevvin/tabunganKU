@@ -3,7 +3,7 @@ $(function(){
 	$('button[type="submit"]').click(function() {
 	    $('input[name="'+focus+'"]').focus();
 	});
-	$('input, textarea').addClass('form-control');
+	$('input, textarea').addClass('form-control m-input m-input--air m-input--pill');
 	var save_and_close = false;
 
 	$('.ptogtitle').click(function(){

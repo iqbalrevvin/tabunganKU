@@ -7,7 +7,6 @@
 	//$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 ?>
-
 <div class="m-content box-body flexigrid"  data-unique-hash="<?php echo $unique_hash; ?>">	
 	<div class="m-portlet m-portlet--mobile">
 		<div class="m-portlet__head">
@@ -24,6 +23,7 @@
 			<div class="flexigrid crud-form box" data-unique-hash="<?php echo $unique_hash; ?>">
 				<div class="box-header with-border">
 					<!--<h3 class="box-title"><i class="fa fa-plus-circle"></i> <?php echo $this->l('form_add'); ?> <?php echo $subject?> </h3>-->
+					<div id='report-error' class='report-div error alert alert-danger' role="alert"></div>
 				</div>
 
 				<div id='main-table-box' class="box-body">
@@ -52,15 +52,15 @@
 						?>
 					<!-- End of hidden inputs -->
 					<?php if ($is_ajax) { ?><input type="hidden" name="is_ajax" value="true" /><?php }?>
-					<div id='report-error' class='report-div error alert alert-danger' role="alert"></div>
+					
 					<div id='report-success' class='report-div success alert alert-success'></div>
 				       
 
-					<button type="submit" id="form-button-save" class="btn btn-primary"><?php echo $this->l('form_save'); ?></button>
+					<button type="submit" id="form-button-save" class="btn btn-accent m-btn m-btn--air m-btn--custom"><?php echo $this->l('form_save'); ?></button>
 					<?php 	if(!$this->unset_back_to_list) { ?>
 					
-					<button type="button" id="save-and-go-back-button" class="btn btn-info"><?php echo $this->l('form_save_and_go_back'); ?></button>
-					<button type="button" id="cancel-button" class="btn btn-default"><?php echo $this->l('form_cancel'); ?></button>
+					<button type="button" id="save-and-go-back-button" class="btn btn-info m-btn m-btn--air m-btn--custom"><?php echo $this->l('form_save_and_go_back'); ?></button>
+					<button type="button" id="cancel-button" class="btn btn-danger m-btn m-btn--air m-btn--custom"><?php echo $this->l('form_cancel'); ?></button>
 					<?php 	} ?>
 					<span class='small-loading' id='FormLoading'><img src="<?php echo base_url('assets/svg/loading-spin-primary.svg') ?>" alt="loading..."> <?php echo $this->l('form_insert_loading'); ?></span>
 					<?php echo form_close(); ?>

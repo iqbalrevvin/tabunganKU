@@ -42,7 +42,7 @@ class Config extends CI_Controller {
 
     	$crud->set_table('users');
     	$crud->set_subject('Pengguna Sistem');
-    	$crud->columns('username','email','groups','active');
+    	$crud->columns('identity_number','first_name','username','email','groups','active');
     	$crud->display_as('identity_number','No. Identitas');
     	$crud->display_as('username','Nama Pengguna');
     	$crud->display_as('groups','Hak Akses');
@@ -59,17 +59,17 @@ class Config extends CI_Controller {
     	if ($this->uri->segment(3) !== 'read')
 		{
 	    	$crud->add_fields('identity_number','first_name', 'last_name', 'place_of_birth', 'date_of_birth', 'email', 'phone','groups' ,'username', 'password', 'password_confirm');
-			$crud->edit_fields('identity_number','username','first_name', 'last_name' , 'place_of_birth', 'date_of_birth', 'email', 'phone','groups' , 'last_login','old_password','new_password');
+			$crud->edit_fields('username','first_name', 'last_name' , 'place_of_birth', 'date_of_birth', 'email', 'phone','groups' , 'last_login','old_password','new_password');
 		}else{
 			$crud->set_read_fields('identity_number','first_name','last_name', 'place_of_birth', 'date_of_birth', 'email', 'groups');
 		}
 		$crud->set_relation_n_n('groups', 'users_groups', 'groups', 'user_id', 'group_id', 'name');
 
 		//VALIDATION
-		$crud->required_fields('identity_number','username','first_name', 'last_name', 'email', 'phone', 'password', 'password_confirm');
+		$crud->required_fields('identity_number','username','first_name', 'email', 'phone', 'password', 'password_confirm');
 		$crud->set_rules('email', 'E-mail', 'required|valid_email');
 		$crud->set_rules('phone', 'No. Telepon', 'required|numeric|min_length[12]');
-		$crud->set_rules('identity_number', 'No. Identitas','required|numeric|min_length[' . $this->config->item('identity_number_min_length', 'ion_auth') . ']|max_length[' . $this->config->item('identity_number_max_length', 'ion_auth') . ']');
+		$crud->set_rules('identity_number', 'No. Identitas','is_unique[users.identity_number]|required|numeric|min_length[' . $this->config->item('identity_number_min_length', 'ion_auth') . ']|max_length[' . $this->config->item('identity_number_max_length', 'ion_auth') . ']');
 		$crud->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
    		$crud->set_rules('new_password', 'New password', 'min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
 
@@ -81,11 +81,15 @@ class Config extends CI_Controller {
 		$crud->change_field_type('new_password', 'password');
 
 		//CALLBACKS
+		$crud->callback_column('identity_number',array($this,'identity_number_callback'));
+		$crud->callback_column('first_name',array($this,'first_name_callback'));
 		$crud->callback_insert(array($this, 'create_user_callback'));
 		$crud->callback_update(array($this, 'edit_user_callback'));
 		$crud->callback_field('last_login',array($this,'last_login_callback'));
 		$crud->callback_column('date_of_birth',array($this,'date_of_birth_callback'));
+		$crud->callback_column('groups',array($this,'groups_callback'));
 		$crud->callback_column('active',array($this,'active_callback'));
+
 
 		//VIEW
 		$output = $crud->render();
@@ -145,6 +149,19 @@ class Config extends CI_Controller {
 		return $value;
 	}
 
+	function groups_callback($value = '', $primary_key = null){
+		$value = '<b>'.$value.'</b>';
+		return $value;
+	}
+	function identity_number_callback($value = '', $primary_key = null){
+		$value = '<b>'.$value.'</b>';
+		return $value;
+	}
+	function first_name_callback($value = '', $primary_key = null){
+		$value = '<b>'.$value.'</b>';
+		return $value;
+	}
+
 	function delete_user($primary_key) {
 		if ($this->ion_auth_model->delete_user($primary_key)) {
 			return true;
@@ -159,19 +176,22 @@ class Config extends CI_Controller {
 		$groups   = $post_array['groups'];
 		$old 	  = $post_array['old_password'];
 		$new 	  = $post_array['new_password'];
-		$data     = array(
-					'username'   => $post_array['username'],
-					'email'      => $post_array['email'],
-					'phone'      => $post_array['phone'],
-					'first_name' => $post_array['first_name'],
-					'last_name'  => $post_array['last_name']
-				);
+			$data     = array(
+						'username'   		=> $post_array['username'],
+						'email'      		=> $post_array['email'],
+						'phone'      		=> $post_array['phone'],
+						'first_name' 		=> $post_array['first_name'],
+						'last_name'  		=> $post_array['last_name'],
+						'place_of_birth'  	=> $post_array['place_of_birth'],
+						'date_of_birth'  	=> $post_array['date_of_birth']
+					);
+		
+
 		if ($old != '') {
 			$change = $this->ion_auth->update($primary_key, $data) && $this->ion_auth->change_password($identity, $old, $new) && $this->ion_auth->remove_from_group('', $primary_key) && $this->ion_auth->add_to_group($groups, $primary_key);
 		}else{
 			$change = $this->ion_auth->update($primary_key, $data) && $this->ion_auth->remove_from_group('', $primary_key) && $this->ion_auth->add_to_group($groups, $primary_key);
 		};
-
 		if ($change) {
 			return true;
 		}else{
@@ -186,9 +206,12 @@ class Config extends CI_Controller {
 		$email    = $post_array['email'];
 		$group 	  = $post_array['groups'];
 		$data     = array(
+					'identity_number' => $post_array['identity_number'],
 					'phone'      => $post_array['phone'],
 					'first_name' => $post_array['first_name'],
-					'last_name'  => $post_array['last_name']
+					'last_name'  => $post_array['last_name'],
+					'place_of_birth'  => $post_array['place_of_birth'],
+					'date_of_birth'  => $post_array['date_of_birth'],
 				);
 
 		return $this->ion_auth->register($username, $password, $email, $data, $group);

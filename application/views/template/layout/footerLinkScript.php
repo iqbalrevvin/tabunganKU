@@ -22,11 +22,11 @@
 <?php endforeach; } ?>
 
 <!--JS Plugins-->
-<?php if (isset($js_plugins)): ?>
-    <?php foreach ($js_plugins as $url_plugin): ?>
-        <script src="<?= base_url($url_plugin) ?>"></script>                
-    <?php endforeach ?>
-<?php endif ?>
+<?php #if (isset($js_plugins)): ?>
+    <?php #foreach ($js_plugins as $url_plugin): ?>
+        <!--<script src="<?= base_url($url_plugin) ?>"></script>-->                
+    <?php #endforeach ?>
+<?php #endif ?>
 
 <script>
     site         = '<?php echo site_url(); ?>';

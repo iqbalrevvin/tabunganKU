@@ -5,11 +5,11 @@
 			<tr class='hDiv'>
 				<?php foreach($columns as $column){?>
 				<th class="field-sorting <?php if(isset($order_by[0]) &&  $column->field_name == $order_by[0]){?><?php echo $order_by[1]?><?php }?>" rel='<?php echo $column->field_name?>'>
-					<?php echo $column->display_as?> <span class="sort pull-right"><i class="fa fa-sort"></i></span>
+					<b><?php echo $column->display_as?></b> <span class="sort pull-right"><i class="fa fa-sort"></i></span>
 				</th>
 				<?php }?>
 				<?php if(!$unset_delete || !$unset_edit || !$unset_read || !empty($actions)){?>
-				<th abbr="tools" axis="col1"><?php echo $this->l('list_actions'); ?></th>
+				<th abbr="tools" axis="col1"><b><?php echo $this->l('list_actions'); ?></b></th>
 				<?php }?>
 			</tr>
 		</thead>		
