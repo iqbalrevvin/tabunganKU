@@ -82,7 +82,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--CSS PLUGINS-->
     <?php if (isset($css_plugins)): ?>
         <?php foreach ($css_plugins as $url_plugin): ?>
-            <link rel="stylesheet" href="<?php echo base_url("$url_plugin") ?>">
+            <!--<link rel="stylesheet" href="<?php echo base_url("$url_plugin") ?>">-->
         <?php endforeach ?>
     <?php endif ?>
     <!--Custom CSS-->

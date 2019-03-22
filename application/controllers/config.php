@@ -42,7 +42,7 @@ class Config extends CI_Controller {
 
     	$crud->set_table('users');
     	$crud->set_subject('Pengguna Sistem');
-    	$crud->columns('identity_number','first_name','username','email','groups','active');
+    	$crud->columns('identity_number','first_name','username','email','groups','active','online');
     	$crud->display_as('identity_number','No. Identitas');
     	$crud->display_as('username','Nama Pengguna');
     	$crud->display_as('groups','Hak Akses');
@@ -89,6 +89,7 @@ class Config extends CI_Controller {
 		$crud->callback_column('date_of_birth',array($this,'date_of_birth_callback'));
 		$crud->callback_column('groups',array($this,'groups_callback'));
 		$crud->callback_column('active',array($this,'active_callback'));
+		$crud->callback_column('online',array($this,'online_callback'));
 
 
 		//VIEW
@@ -120,9 +121,9 @@ class Config extends CI_Controller {
 	function active_callback($value, $row)
 	{
 		if ($value == 1) {
-			$val = '<span class="m-badge m-badge--success m-badge--wide">Aktif</span>';
+			$val = '<span class="m-badge m-badge--info m-badge--wide m-badge--rounded">Aktif</span>';
 		}else{
-			$val = '<span class="m-badge m-badge--danger m-badge--wide">Nonaktif</span>';
+			$val = '<span class="m-badge m-badge--danger m-badge--wide m-badge--rounded">Nonaktif</span>';
 		}
 		return "<a href='".site_url('config/activate/'.$row->id.'/'.$value)."'>$val</a>";
 	}
@@ -134,6 +135,29 @@ class Config extends CI_Controller {
 		}else{
 			$this->ion_auth->activate($id);
 		}
+
+		redirect('config/users');
+	}
+
+	function online_callback($value, $row)
+	{
+		if ($value == 'On') {
+			$val = '<span class="m-badge m-badge--success m-badge--wide">Online</span>';
+		}else{
+			$val = '<span class="m-badge m-badge--danger m-badge--wide">Offline</span>';
+		}
+		return "<a href='".site_url('config/online/'.$row->id.'/'.$value)."'>$val</a>";
+	}
+
+	function online($id, $value){
+		
+		if($value == 'On'):
+			$data = array('online' => 'Off' );
+			$this->ion_auth->update($id, $data);
+		else:
+			$data = array('online' => 'On' );
+			$this->ion_auth->update($id, $data);
+		endif;
 
 		redirect('config/users');
 	}
@@ -200,7 +224,6 @@ class Config extends CI_Controller {
 	}
 
 	function create_user_callback($post_array, $primary_key = null) {		
-
 		$username = $post_array['username'];
 		$password = $post_array['password'];
 		$email    = $post_array['email'];
@@ -212,8 +235,8 @@ class Config extends CI_Controller {
 					'last_name'  => $post_array['last_name'],
 					'place_of_birth'  => $post_array['place_of_birth'],
 					'date_of_birth'  => $post_array['date_of_birth'],
+					'online'  => 'Off'
 				);
-
 		return $this->ion_auth->register($username, $password, $email, $data, $group);
 	}
 

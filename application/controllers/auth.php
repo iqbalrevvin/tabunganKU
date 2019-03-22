@@ -27,7 +27,7 @@ class Auth extends CI_Controller {
 			$template         = 'auth_template';
 			$this->outputview->output_front($view, $template, $data);
 		}else{
-			redirect('home');
+				redirect('home');
 		}
 		
 	}
@@ -35,9 +35,27 @@ class Auth extends CI_Controller {
 	function ajax_login()
 	{
 		$remember = (bool) $this->input->post('remember');
-	
+		
 		if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)){
-			echo "true";
+			//JIKA USER TERDETEKSI ONLINE
+			if($this->ion_auth->user()->row()->online == 'On'){
+				//JIKA KONDISI USER ADALAH ADMIN
+				if($this->ion_auth->is_admin()){
+					$data = array('online' => 'On');
+					$id = $this->ion_auth->user()->row()->id;
+					$this->ion_auth->update($id, $data);
+					echo "true";
+				}else{
+					echo "online";
+					$this->ion_auth->logout();
+				}
+			//JIKA TERDETEKSI TIDAK ONLINE
+			}else{
+				$data = array('online' => 'On');
+				$id = $this->ion_auth->user()->row()->id;
+				$this->ion_auth->update($id, $data);
+				echo "true";
+			}
 		}else{
 			echo "false";
 		}
@@ -45,7 +63,11 @@ class Auth extends CI_Controller {
 
 	public function logout()
 	{
+		$id = $this->ion_auth->user()->row()->id;
+		$data = array('online' => 'Off');
+		$this->ion_auth->update($id, $data);
 		$logout = $this->ion_auth->logout();
+		
 		redirect('auth/login');
 	}
 

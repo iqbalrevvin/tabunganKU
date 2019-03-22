@@ -61,7 +61,13 @@ $(function(){
               $('input[name="identity"]').focus();
               $("#btnLoading").fadeOut();
               mApp.unblock("#loginArea");
+            }else if(data == "online"){
+              $('.message').html('<div class="m-alert alert alert-warning alert-dismissible fade show text-dark" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button><strong>Peringatan!</strong> Akun Sedang Aktif, Hubungi Administrator Untuk Merubah Status Login Anda.</div>').hide().slideDown();
+                $('input[name="identity"]').focus();
+                $("#btnLoading").fadeOut();
+                mApp.unblock("#loginArea");
             }else{
+              $('.message').html('<div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button><strong>Login Berhasil!</strong> Halaman Akan Dialihkan</div>').hide().slideDown();
               window.location.href = redirect;
             }
             //$("#btnLoading").fadeOut();
