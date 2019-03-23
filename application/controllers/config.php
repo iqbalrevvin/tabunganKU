@@ -106,7 +106,9 @@ class Config extends CI_Controller {
 		$crud = new grocery_CRUD();
 
 		$crud->set_table('groups');
-		$crud->set_subject('Groups');
+		$crud->set_subject('Hak Akses');
+		$crud->display_as('name', 'Nama Hak Akses');
+		$crud->display_as('description', 'Deskripsi');
 
 		//VIEW
 		$output = $crud->render();
