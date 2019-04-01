@@ -84,7 +84,7 @@ $config['salt_prefix']    = '$2y$';
 $config['site_title']                 = "tabunganku.net";       // Site Title, example.com
 $config['admin_email']                = "admin@smkikakartika.sch.id"; // Admin Email, admin@example.com
 $config['default_group']              = 'members';           // Default group, use name
-$config['admin_group']                = 'admin';             // Default administrators group, use name
+$config['admin_group']                = 'Developer';             // Default administrators group, use name
 $config['identity']                   = 'username';             // A database column which is used to login with
 //IDENTITY-NUMBER---------------------------------------------------------------------------------------------
 $config['identity_number_min_length'] = '16';	

@@ -14,6 +14,8 @@
 <script src="<?= base_url('assets/js/scripts.bundle.js') ?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/vendors/datatables-metronic/datatables.bundle.js') ?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/js/components/blockui.js') ?>"></script>
+<script src="<?= base_url('assets/js/demo/bootstrap-maxlength.js') ?>"></script>
+<script src="<?= base_url('assets/js/demo/bootstrap-select.js') ?>"></script>
 
 
 <!-- GroceryCRUD JS -->
@@ -46,17 +48,49 @@
 <script type="text/javascript">
 
     jQuery(document).ready(function() {
-       
+      BootstrapDatepicker.init()
     });
      paceOptions = {
-          ajax: false,
-          document: false,
-          eventLag: false
-        };
+        ajax: false,
+        document: false,
+        eventLag: false
+      };
 
-        Pace.on('done', function() {
-          $('#preloader').delay(100).fadeOut(300);
-        });
+      Pace.on('done', function() {
+        $('#preloader').delay(100).fadeOut(300);
+      });
+
+      // FUNGSI DATE PICKER
+      var BootstrapDatepicker = function() {
+          var t;
+          t = mUtil.isRTL() ? {
+              leftArrow: '<i class="la la-angle-right"></i>',
+              rightArrow: '<i class="la la-angle-left"></i>'
+          } : {
+              leftArrow: '<i class="la la-angle-left"></i>',
+              rightArrow: '<i class="la la-angle-right"></i>'
+          };
+          return {
+              init: function() {
+              $(".m_datepicker_nonModal, .m_datepicker_3_validate_nonModal").datepicker({
+                      rtl: mUtil.isRTL(),
+                      format: 'yyyy-mm-dd',
+                      todayBtn: "linked",
+                      clearBtn: !0,
+                      todayHighlight: !0,
+                      templates: t
+                  }), $(".m_datepicker_modal").datepicker({
+                      rtl: mUtil.isRTL(),
+                      format: 'yyyy-mm-dd',
+                      orientation: "top left",
+                      todayBtn: "linked",
+                      clearBtn: !0,
+                      todayHighlight: !0,
+                      templates: t
+                  })
+              }
+          }
+      }();
 
 </script>
 

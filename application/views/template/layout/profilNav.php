@@ -1,4 +1,5 @@
 <?php $session = $this->ion_auth->user()->row(); ?>
+<?php $levelAkses = $this->ion_auth->groups()->row(); ?>
 
 <li class="m-nav__item m-topbar__user-profile  
             m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
@@ -24,12 +25,15 @@
                         <img src="<?= base_url('assets/image/admin/admin-L.png') ?>" class="m--img-rounded m--marginless" alt="" width="75px" />
                     </div>
                     <div class="m-card-user__details">
-                        <span class="m-card-user__name m--font-weight-500">
+                        <span class="m-card-user__name m--font-weight-600">
                             <?= $session->first_name ?>
                         </span>
-                        <a href="" class="m-card-user__email m--font-weight-300 m-link">
+                        <a href="#" class="m-card-user__email m--font-weight-300 m-link">
                             <?= $session->email ?>
                         </a>
+                        <span class="m-card-user__name m--font-weight-400">
+                            -<?= $levelAkses->name ?>-
+                        </span>
                     </div>
                 </div>
             </div>
