@@ -1,6 +1,4 @@
 <?php
-	$this->set_css('assets/vendors/datatables-metronic/datatables.bundle.css');
-	$this->set_js('assets/js/components/tabel-metronic2.js');
 	// Jquery
 	$this->set_js_lib($this->default_javascript_path.'/'.grocery_CRUD::JQUERY);	
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
@@ -105,12 +103,18 @@
 		</div>
 		<?php echo form_open( $ajax_list_url, 'method="post" id="filtering_form" class="filtering_form" 
 			autocomplete = "off" data-ajax-list-info-url="'.$ajax_list_info_url.'"'); ?>
-		    <!--iki tampil table'e-->
-		    
+	
+
 
 		<div id='ajax_list' class="ajax_list m-portlet__body">
 			<?php echo $list_view ?>
 		</div>
+		
+		<input type='hidden' name='order_by[0]' id='hidden-sorting' class='hidden-sorting' 
+				value='<?php if(!empty($order_by[0])){?><?php echo $order_by[0]?><?php }?>'/>
+		<input type='hidden' name='order_by[1]' id='hidden-ordering' class='hidden-ordering'  
+				value='<?php if(!empty($order_by[1])){?><?php echo $order_by[1]?><?php }?>'/>
+				
 		<div class="overlay" id="overlayTable" style="display:none;">
 			<div id="preloader" class="m-page--loading-enabled m-page--loading">
 			    <div class="m-page-loader m-page-loader--base">

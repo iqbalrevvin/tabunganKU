@@ -44,7 +44,7 @@
 						<div class="form-group m-form__group">
 							<label for="">Jenis Kelamin</label>
 							<select class="form-control m-input m-input--air m-bootstrap-select m-bootstrap-select--air 
-								m-bootstrap-select--pill m_selectpicker">
+								m-bootstrap-select--pill m_selectpicker">	
 									<option value="">Pilih Jenis Kelamin</option>
 									<option value="Laki-Laki">Laki - Laki</option>
 									<option value="Perempuan">Perempuan</option>
@@ -197,9 +197,10 @@
 								<select class="form-control m-bootstrap-select m-bootstrap-select--air 
 									m-bootstrap-select--pill m_selectpicker" id="jenisNasabah" name="jenisNasabah">
 									<option value="">Pilih Jenis Rekening</option>
-									<option value="Tenaga Pendidik">Tenaga Pendidik</option>
-									<option value="Siswa">Siswa</option>
-									<option value="Alumni">Alumni</option>
+									<?php foreach ($listJenisRekening as $jenis): ?>
+										<option value="<?= $jenis->idJenis_rekening ?>"><?= $jenis->nama_jenis_rekening ?></option>
+									<?php endforeach; ?>
+									
 								</select>
 								<span class="m-form__help">Tentukan Jenis Rekening.</span>
 							</div>
@@ -262,7 +263,6 @@
 										<span class="m-list-timeline__text">
 											Nasabah Mengisi Data Utama Dengan Benar & Lengkap
 										</span>
-	
 									</div>
 									<div class="m-list-timeline__item">
 										<span class="m-list-timeline__badge m-list-timeline__badge--warning"></span>

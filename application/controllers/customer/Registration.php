@@ -7,12 +7,16 @@ class Registration extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('OutputView');
+		$this->load->model('customer/Customer_m');
+
 	}
 
 	public function index(){
-		$data['judul'] 		= 'PENDAFTARAN NASABAH';
-		$template 			= 'admin_template';
-		$view 				= 'customer/registration.php';
+		$jenisRekening = $this->Customer_m->listJenisRekening();
+		$data['listJenisRekening'] 	= $jenisRekening;
+		$data['judul'] 				= 'PENDAFTARAN NASABAH';
+		$template 					= 'admin_template';
+		$view 						= 'customer/registration.php';
 
 		$this->outputview->output_admin($view, $template, $data);
 	}

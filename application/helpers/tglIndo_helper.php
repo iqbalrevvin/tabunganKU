@@ -1,9 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
       
-    if ( ! function_exists('tgl_indo'))
-    {
-        function date_indo($tgl)
-        {
+    if (!function_exists('tgl_indo')){
+        function date_indo($tgl){
             $ubah = gmdate($tgl, time()+60*60*8);
             $pecah = explode("-",$ubah);
             $tanggal = $pecah[2];
@@ -13,10 +11,8 @@
         }
     }
       
-    if ( ! function_exists('bulan'))
-    {
-        function bulan($bln)
-        {
+    if (! function_exists('bulan')){
+        function bulan($bln){
             switch ($bln)
             {
                 case 1:
@@ -60,8 +56,7 @@
     }
  
     //Format Shortdate
-    if ( ! function_exists('shortdate_indo'))
-    {
+    if (!function_exists('shortdate_indo')){
         function shortdate_indo($tgl)
         {
             $ubah = gmdate($tgl, time()+60*60*8);
@@ -73,8 +68,7 @@
         }
     }
       
-    if ( ! function_exists('short_bulan'))
-    {
+    if ( ! function_exists('short_bulan')){
         function short_bulan($bln)
         {
             switch ($bln)
@@ -120,8 +114,7 @@
     }
  
     //Format Medium date
-    if ( ! function_exists('mediumdate_indo'))
-    {
+    if ( ! function_exists('mediumdate_indo')){
         function mediumdate_indo($tgl)
         {
             $ubah = gmdate($tgl, time()+60*60*8);
@@ -133,8 +126,7 @@
         }
     }
       
-    if ( ! function_exists('medium_bulan'))
-    {
+    if ( ! function_exists('medium_bulan')){
         function medium_bulan($bln)
         {
             switch ($bln)
@@ -180,8 +172,7 @@
     }
      
     //Long date indo Format
-    if ( ! function_exists('longdate_indo'))
-    {
+    if ( ! function_exists('longdate_indo')){
         function longdate_indo($tanggal)
         {
             $ubah = gmdate($tanggal, time()+60*60*8);

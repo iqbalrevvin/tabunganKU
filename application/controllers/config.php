@@ -250,7 +250,7 @@ class Config extends CI_Controller {
 		$crud->set_table('settings');
 		$crud->set_subject('Settings');
 		$crud->set_field_upload('logo','assets/image');
-		$crud->columns('logo','judul','instansi','alamat','versi');
+		$crud->columns('logo','judul','npsn','instansi','alamat','versi');
 		$crud->unset_add();
 		$crud->unset_delete();
 		$crud->unset_export();
