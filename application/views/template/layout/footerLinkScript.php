@@ -1,7 +1,7 @@
 <!--begin::Base Scripts -->
 <script src="<?= base_url('assets/js/jquery.min.js') ?>" type="text/javascript"></script>
-<script src="<?= base_url('assets/vendors/jquery-ui/jquery-ui.min.css') ?>" type="text/javascript"></script>
-<script src="<?= base_url('assets/vendors/highchart/highcharts.js') ?>" type="text/javascript"></script>
+<!--<script src="<?= base_url('assets/vendors/jquery-ui/jquery-ui.min.css') ?>" type="text/javascript"></script>-->
+<!--<script src="<?= base_url('assets/vendors/highchart/highcharts.js') ?>" type="text/javascript"></script>-->
 <script src="<?= base_url('assets/vendors/pace-preload/pace.js') ?>" type="text/javascript"></script>
 <!--BOOTSRAP FILE UPLOAD-->
 <script src="<?= base_url('assets/vendors/bootstrap-fileupload/bootstrap-fileupload.js') ?>"></script>
@@ -16,6 +16,7 @@
 <script src="<?= base_url('assets/js/components/blockui.js') ?>"></script>
 <script src="<?= base_url('assets/js/demo/bootstrap-maxlength.js') ?>"></script>
 <script src="<?= base_url('assets/js/demo/bootstrap-select.js') ?>"></script>
+<script src="<?= base_url('assets/js/demo/select2.js') ?>"></script>
 
 
 <!-- GroceryCRUD JS -->
@@ -23,12 +24,7 @@
     <script src="<?php echo $file; ?>"></script>
 <?php endforeach; } ?>
 
-<!--JS Plugins-->
-<?php #if (isset($js_plugins)): ?>
-    <?php #foreach ($js_plugins as $url_plugin): ?>
-        <!--<script src="<?= base_url($url_plugin) ?>"></script>-->                
-    <?php #endforeach ?>
-<?php #endif ?>
+
 
 <script>
     site         = '<?php echo site_url(); ?>';

@@ -90,8 +90,9 @@
                     </div>
                 </div>
                 <!-- END: Subheader -->
+                <div class="">
                    <?= $page ?>
-      
+                </div>
             </div>
         </div>
 

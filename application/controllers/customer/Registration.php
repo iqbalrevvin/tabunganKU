@@ -1,5 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Registration extends CI_Controller {
 
@@ -12,13 +11,22 @@ class Registration extends CI_Controller {
 	}
 
 	public function index(){
-		$jenisRekening = $this->Customer_m->listJenisRekening();
-		$data['listJenisRekening'] 	= $jenisRekening;
+		#$data['listJenisRekening'] 	= $jenisRekening;
 		$data['judul'] 				= 'PENDAFTARAN NASABAH';
 		$template 					= 'admin_template';
 		$view 						= 'customer/registration.php';
 
 		$this->outputview->output_admin($view, $template, $data);
+	}
+
+	public function formRegisterView(){
+		$jenisRekening = $this->Customer_m->listJenisRekening();
+		$data['listJenisRekening'] 	= $jenisRekening;
+		$data['judul'] 				= 'PENDAFTARAN NASABAH';
+		#$template 					= 'blank';
+		#$view 						= 'customer/formRegistration.php';
+		#$this->outputview->output_admin($view, $template, $data);
+		$this->load->view('customer/formRegistration', $data, FALSE);
 	}
 
 }

@@ -1,7 +1,13 @@
 var Select2 = {
     init: function() {
-        $("#m_select2_1, #m_select2_1_validate").select2({
-            placeholder: "Select a state"
+        $(".m_select2").select2({
+            placeholder: "Pilih Data",
+            allowClear: !0
+        }), $(".m_select2_hiding").select2({
+            placeholder: "Pilih Data",
+            minimumResultsForSearch: 1 / 0
+        }), $(".m_select2_1, .m_select2_1_validate").select2({
+            placeholder: "Pilih Data"
         }), $("#m_select2_2, #m_select2_2_validate").select2({
             placeholder: "Select a state"
         }), $("#m_select2_3, #m_select2_3_validate").select2({

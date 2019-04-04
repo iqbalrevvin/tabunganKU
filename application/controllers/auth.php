@@ -27,7 +27,7 @@ class Auth extends CI_Controller {
 			$template         = 'auth_template';
 			$this->outputview->output_front($view, $template, $data);
 		}else{
-				redirect('home');
+			redirect('home');
 		}
 		
 	}

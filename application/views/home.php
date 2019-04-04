@@ -1,4 +1,4 @@
-<?php require_once('template/other/preloader.php'); ?>
+<?php #require_once('template/other/preloader.php'); ?>
 <!-- END: Subheader -->
 <div class="m-content">
     <div class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-dismissible m--margin-bottom-30" role="alert">
