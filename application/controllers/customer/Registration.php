@@ -33,26 +33,17 @@ class Registration extends CI_Controller {
 		$validate->set_rules('NIK', 'NIK', 'required|min_length[16]|max_length[16]');
 
 		if ($validate->run() == TRUE) {
-			$this->session->set_flashdata('sukses', 'Data Berhasil Ditambahkan');
-			echo $this->session->flashdata('sukses');
-			?><script>
-			swal({
-                title: "Data Nasabah Berhasil Disimpan",
-                text: "Anda Akan Dialihkan Ke Halaman Daftar Nasabah, Mohon Tunggu. . . ",
-                type: "success",
-                timer: 5e3,
-                onOpen: function() {
-                    swal.showLoading()
-                    setTimeout(function () {
-                        //$("#loading").hide();
-                        refresh();
-                    }, 1500);  
-                }
-            })
-			</script><?php
+			$callback = [
+			    'status' 	=> 'sukses',
+			    'pesan' 	=> 'Data Berhasil Disimpan' 
+			];
 		}else{
-			echo validation_errors();
+			$callback = [
+			    'status' 	=> 'gagal',
+			    'pesan' 	=> validation_errors() 
+			];
 		}
+		echo json_encode($callback);
 	}
 
 }

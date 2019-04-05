@@ -323,14 +323,34 @@ var registerAlert = {
 	            	$.ajax({
 	            		url: '<?= base_url('customer/registration/addcustomer') ?>',
 	            		type: 'POST',
-	            		// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+	            		dataType: 'json',
 	            		data: data,
-	            		success: function(result){
-	            			$('#resultAddNasabah').html(result).show();
+	            		beforeSend: function(e) {
+							if(e && e.overrideMimeType) {
+								e.overrideMimeType('application/jsoncharset=UTF-8')
+							}
+						},
+	            		success: function(response){
+	            			// $('#resultAddNasabah').html(result).show();
+	            			if(response.status == 'sukses'){
+	            				swal({
+					                title: "Data Nasabah Berhasil Disimpan",
+					                text: "Anda Akan Dialihkan Ke Halaman Daftar Nasabah, Mohon Tunggu. . . ",
+					                type: "success",
+					                timer: 5e3,
+					                onOpen: function() {
+					                    swal.showLoading()
+					                    setTimeout(function () {
+					                        //$("#loading").hide();
+					                        refresh();
+					                    }, 1500);  
+					                }
+					            });
+	            			}else{
+	            				$('#resultAddNasabah').html(response.pesan).show()
+	            			}
 	            		}
 	            	})
-
-	                
 	            })
 	        }
         })
