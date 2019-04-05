@@ -16,70 +16,73 @@
 					</div>
 				</div>
 				<!--begin::Form-->
-				<div class="m-form m-form--fit m-form--label-align-right">
-					<div class="m-portlet__body">
-						<div class="form-group m-form__group row">
-							<label class="col-form-label col-lg-3 col-sm-12"><b>Jenis Nasabah</b> :</label>
-							<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill">
-								<select class="form-control m_select2_hiding" id="jenisNasabah" name="jenisNasabah">
-									<option value=""></option>
-									<option value="Tenaga Pendidik">Tenaga Pendidik</option>
-									<option value="Siswa">Siswa</option>
-									<option value="Alumni">Alumni</option>
-								</select>
-								<span class="m-form__help">Tentukan Jenis Nasabah.</span>
+				<form id="formRegisterNasabah">
+					<div class="m-form m-form--fit m-form--label-align-right">
+						<div class="m-portlet__body">
+							<div class="form-group m-form__group row">
+								<label class="col-form-label col-lg-3 col-sm-12"><b>Jenis Nasabah</b> :</label>
+								<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill">
+									<select class="form-control m_select2_hiding" id="jenisNasabah" name="jenisNasabah">
+										<option value=""></option>
+										<option value="Tenaga Pendidik">Tenaga Pendidik</option>
+										<option value="Siswa">Siswa</option>
+										<option value="Alumni">Alumni</option>
+									</select>
+									<span class="m-form__help">Tentukan Jenis Nasabah.</span>
+								</div>
 							</div>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="">No. Identitas/NIK</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_1" maxlength="16" placeholder="16 Digit NIK" id="NIK" name="NIK">
-							<span class="m-form__help">Isi dengan 16 digit No. NIK.</span>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="">Nama Lengkap</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_2" maxlength="50" placeholder="Nama Lengkap Nasabah" id="namaNasabah" name="namaNasabah">
-							<span class="m-form__help">Isi dengan nama lengkap nasabah</span>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="">Jenis Kelamin</label>
-							<select class="form-control m-input m-input--air m-bootstrap-select m-bootstrap-select--air 
-								m-bootstrap-select--pill m_selectpicker">	
-									<option value="">Pilih Jenis Kelamin</option>
-									<option value="Laki-Laki">Laki - Laki</option>
-									<option value="Perempuan">Perempuan</option>
-								</select>
-								<span class="m-form__help">Tentukan jenis kelamin nasabah.</span>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="exampleInputEmail1">Email</label>
-							<input type="email" class="form-control m-input m-input--air m_maxlength_2" maxlength="50"
-								aria-describedby="emailHelp" placeholder="Email Nasabah" id="email" name="email">
-							<span class="m-form__help">Masukan Email nasabah yang valid.</span>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="exampleInputEmail1">No. Hp</label>
-							<input type="number" class="form-control m-input m-input--air" placeholder="No. Hp / WA Nasabah">
-							<span class="m-form__help">Isi dengan No. HP / WA Nasabah</span>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="">Tempat Lahir</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_2" maxlength="30" 
-								placeholder="Tempat Lahir Nasabah" id="tempatLahir" name="tempatLahir">
-							<span class="m-form__help">Isi dengan tempat lahir nasabah</span>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="">Tanggal Lahir</label>
-							<div class="m-input-icon m-input-icon--right">
-								<input type="text" class="form-control m-input  m-input--air m_datepicker_modal" 
-									placeholder="Format : yyyy-mm-dd Atau Pilih Dengan Kalender" id="tanggalLahir" name="tanggalLahir" />
-								<span class="m-input-icon__icon m-input-icon__icon--right">
-									<span><i class="la la-calendar"></i></span>
-								</span>
+							<div class="form-group m-form__group">
+								<label for="">No. Identitas/NIK</label>
+								<input type='text' class="form-control m-input m-input--air m_maxlength_1" maxlength="16" 
+									placeholder="16 Digit NIK" id="NIK" name="NIK">
+								<span class="m-form__help">Isi dengan 16 digit No. NIK.</span>
 							</div>
+							<div class="form-group m-form__group">
+								<label for="">Nama Lengkap</label>
+								<input type='text' class="form-control m-input m-input--air m_maxlength_2" maxlength="50" placeholder="Nama Lengkap Nasabah" id="namaNasabah" name="namaNasabah">
+								<span class="m-form__help">Isi dengan nama lengkap nasabah</span>
+							</div>
+							<div class="form-group m-form__group">
+								<label for="">Jenis Kelamin</label>
+								<select class="form-control m-input m-input--air m-bootstrap-select m-bootstrap-select--air 
+									m-bootstrap-select--pill m_selectpicker">	
+										<option value="">Pilih Jenis Kelamin</option>
+										<option value="Laki-Laki">Laki - Laki</option>
+										<option value="Perempuan">Perempuan</option>
+									</select>
+									<span class="m-form__help">Tentukan jenis kelamin nasabah.</span>
+							</div>
+							<div class="form-group m-form__group">
+								<label for="exampleInputEmail1">Email</label>
+								<input type="email" class="form-control m-input m-input--air m_maxlength_2" maxlength="50"
+									aria-describedby="emailHelp" placeholder="Email Nasabah" id="email" name="email">
+								<span class="m-form__help">Masukan Email nasabah yang valid.</span>
+							</div>
+							<div class="form-group m-form__group">
+								<label for="exampleInputEmail1">No. Hp</label>
+								<input type="number" class="form-control m-input m-input--air" placeholder="No. Hp / WA Nasabah">
+								<span class="m-form__help">Isi dengan No. HP / WA Nasabah</span>
+							</div>
+							<div class="form-group m-form__group">
+								<label for="">Tempat Lahir</label>
+								<input type='text' class="form-control m-input m-input--air m_maxlength_2" maxlength="30" 
+									placeholder="Tempat Lahir Nasabah" id="tempatLahir" name="tempatLahir">
+								<span class="m-form__help">Isi dengan tempat lahir nasabah</span>
+							</div>
+							<div class="form-group m-form__group">
+								<label for="">Tanggal Lahir</label>
+								<div class="m-input-icon m-input-icon--right">
+									<input type="text" class="form-control m-input  m-input--air m_datepicker_modal" 
+										placeholder="Format : yyyy-mm-dd Atau Pilih Dengan Kalender" id="tanggalLahir" name="tanggalLahir" />
+									<span class="m-input-icon__icon m-input-icon__icon--right">
+										<span><i class="la la-calendar"></i></span>
+									</span>
+								</div>
+							</div>
+							
 						</div>
-						
 					</div>
-				</div>
+				</form>
 				<!--end::Form-->
 			</div>
 			<div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
@@ -220,7 +223,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modalSimpan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modalInput" id="modalSimpan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -236,7 +239,10 @@
 							<i class="la la-warning"></i>
 						</div>
 						<div class="m-alert__text">
-							<strong>Perhatian!</strong> Perhatikan Point Berikut Sebelum Melanjutkan !
+							<strong class="text-dark">Perhatian!</strong> 
+							<div id="resultAddNasabah" class="text-danger">	
+								<span class="text-dark">Perhatikan Point Berikut Sebelum Melanjutkan !</span>
+							</div>
 						</div>
 						<div class="m-alert__close">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -302,27 +308,36 @@
 var registerAlert = {
     init: function() {
          $("#btnSimpan").click(function(e) {
-            swal({
-                title: "Anda Yakin Untuk Menyimpan?",
-                text: "Data Nasabah Akan Disimpan Ke Database & Diberi Nomor Rekening!",
-                type: "question",
-                showCancelButton: !0,
-                confirmButtonText: "Ya, Lanjutkan!",
-                cancelButtonText: "Batal"
-            }).then(function(e) {
-                e.value && swal({
-	                title: "Data Nasabah Berhasil Disimpan",
-	                text: "Anda Akan Dialihkan Ke Halaman Daftar Nasabah, Mohon Tunggu. . . ",
-	                type: "success",
-	                timer: 5e3,
-	                onOpen: function() {
-	                    swal.showLoading()
-	                }
+         	if($('#jenisNasabah').val()=="" || $('#namaNasabah').val()=="" || $('#NIK').val()==""){
+         		toastr.error("Terdapat parameter wajib yang tidak boleh kosong!", "Gagal Mengirim");
+         	}else{
+	            swal({
+	                title: "Anda Yakin Untuk Menyimpan?",
+	                text: "Data Nasabah Akan Disimpan Ke Database & Diberi Nomor Rekening!",
+	                type: "question",
+	                showCancelButton: !0,
+	                confirmButtonText: "Ya, Lanjutkan!",
+	                cancelButtonText: "Batal"
+	            }).then(function(e) {
+	            	var data = $('#formRegisterNasabah').serialize();
+	            	$.ajax({
+	            		url: '<?= base_url('customer/registration/addcustomer') ?>',
+	            		type: 'POST',
+	            		// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+	            		data: data,
+	            		success: function(result){
+	            			$('#resultAddNasabah').html(result).show();
+	            		}
+	            	})
+
+	                
 	            })
-            })
+	        }
         })
     }
 };
+
+//DATE PICKER INITIAL
 var BootstrapDatepicker = function() {
   var t;
   t = mUtil.isRTL() ? {
@@ -353,6 +368,10 @@ var BootstrapDatepicker = function() {
       }
   }
 }();
+
+
+
+
 jQuery(document).ready(function() {
     registerAlert.init()
     BootstrapDatepicker.init()

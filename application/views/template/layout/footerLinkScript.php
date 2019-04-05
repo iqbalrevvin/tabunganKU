@@ -56,6 +56,25 @@
         $('#preloader').delay(100).fadeOut(300);
       });
 
+      //TOAST KOMPONEN-------------------------------------
+        toastr.options = {
+            "closeButton": true,
+            "debug": true,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-left",
+            "preventDuplicates": false,
+            "showDuration": "200",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    //-----------------------------------------------------
+
       // FUNGSI DATE PICKER
       var BootstrapDatepicker = function() {
           var t;
@@ -87,6 +106,22 @@
               }
           }
       }();
+
+//MODAL BLOCK LOAD------------------------------------------
+  function modalBlockLoad() {
+      mApp.block(".modalInput .modal-content", {
+              overlayColor: "#000000",
+              type: "loader",
+              state: "primary",
+              message: "Memeriksa & Mengirim Paramater..."
+          });
+  }
+//-----------------------------------------------------
+
+// FUNGSI REFRESH
+function refresh() {
+    window.location.reload();
+}
 
 </script>
 

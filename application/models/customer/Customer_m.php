@@ -16,6 +16,10 @@ class Customer_m extends CI_Model {
 		return $query->result();
 	}
 
+	function addCustomer(){
+			
+	}
+
 }
 
 /* End of file Customer_m.php */
