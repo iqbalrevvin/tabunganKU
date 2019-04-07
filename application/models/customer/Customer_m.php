@@ -3,9 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Customer_m extends CI_Model {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
+	}
+
+	function getJangkaSimpanan($jenisRekening){
+		$query = $this->db->get_where('jenis_rekening', array('idJenis_rekening' => $jenisRekening));
+		return $query->row();
+	}
+
+	function getKodeRekeningNasabah(){
+		$this->db->select('MAX(idRekening_nasabah)');
 	}
 	
 	public function listJenisRekening(){
@@ -16,8 +24,9 @@ class Customer_m extends CI_Model {
 		return $query->result();
 	}
 
-	function addCustomer(){
-			
+
+	public function addCustomer($data){
+		$this->db->insert('nasabah',$data);
 	}
 
 }
