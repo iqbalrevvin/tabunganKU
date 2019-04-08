@@ -1,3 +1,4 @@
+<form id="formRegisterNasabah" method="POST">
 <div class="m-content">
 	<div class="row">
 		<!--FORM DATA NASABAH-->
@@ -10,13 +11,13 @@
 								<i class="flaticon-user-add"></i>
 							</span>
 							<h3 class="m-portlet__head-text">
-								FORM DATA NASABAH
+								FORM DATA NASABAH <?= $norek ?>
 							</h3>
 						</div>
 					</div>
 				</div>
 				<!--begin::Form-->
-				<form id="formRegisterNasabah">
+				
 					<div class="m-form m-form--fit m-form--label-align-right">
 						<div class="m-portlet__body">
 							<div class="form-group m-form__group row">
@@ -60,7 +61,8 @@
 							</div>
 							<div class="form-group m-form__group">
 								<label for="exampleInputEmail1">No. Hp</label>
-								<input type="number" class="form-control m-input m-input--air" name="noHP" id="noHP" placeholder="No. Hp / WA Nasabah">
+								<input type="text" class="form-control m-input m-input--air m_maxlength_2" name="noHP" id="noHP" 
+									maxlength="14" placeholder="No. Hp / WA Nasabah">
 								<span class="m-form__help">Isi dengan No. HP / WA Nasabah</span>
 							</div>
 							<div class="form-group m-form__group">
@@ -197,11 +199,10 @@
 							<label class="col-form-label col-lg-3 col-sm-12"><b>Jenis Rekening</b> :</label>
 							<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill inputBlock">
 								<select class="form-control m_select2_hiding" id="jenisRekening" name="jenisRekening">
-									<option value="">Pilih Jenis Rekening</option>
+									<option value=""></option>
 									<?php foreach ($listJenisRekening as $jenis): ?>
 										<option value="<?= $jenis->idJenis_rekening ?>"><?= $jenis->nama_jenis_rekening ?></option>
 									<?php endforeach; ?>
-									
 								</select>
 								<span class="m-form__help">Tentukan Jenis Rekening.</span>
 							</div>
@@ -221,9 +222,10 @@
 			</div>
 		</div>
 		<!--END FORM DATA JENIS REKENING-->
-		</form>
+		
 	</div>
 </div>
+</form>
 
 <div class="modal fade modalInput" id="modalSimpan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
@@ -341,8 +343,8 @@ var registerAlert = {
     init: function() {
          $("#btnSimpan").click(function(e) {
          	modalBlockLoad()
-         	if($('#tipeNasabah').val()=="" //|| $('#namaNasabah').val()=="" || $('#NIK').val()=="" || $('#JK').val()=="" || $('#noHP').val()=="" || $('#tempatLahir').val()=="" || $('#tanggalLahir').val()==""){
-         		){toastr.error("Terdapat parameter wajib yang tidak boleh kosong!", "Gagal Mengirim");
+         	if($('#tipeNasabah').val()=="" || $('#namaNasabah').val()=="" || $('#NIK').val()=="" || $('#JK').val()=="" || $('#noHP').val()=="" || $('#tempatLahir').val()=="" || $('#tanggalLahir').val()==""){
+         		toastr.error("Terdapat parameter wajib yang tidak boleh kosong!", "Gagal Mengirim");
          		mApp.unblock(".modalInput");
          	}else{
 	            swal({
