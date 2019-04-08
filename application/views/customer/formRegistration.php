@@ -1,3 +1,4 @@
+<form id="formRegisterNasabah" method="POST">
 <div class="m-content">
 	<div class="row">
 		<!--FORM DATA NASABAH-->
@@ -10,19 +11,19 @@
 								<i class="flaticon-user-add"></i>
 							</span>
 							<h3 class="m-portlet__head-text">
-								FORM DATA NASABAH
+								FORM DATA NASABAH <?= $norek ?>
 							</h3>
 						</div>
 					</div>
 				</div>
 				<!--begin::Form-->
-				<form id="formRegisterNasabah">
+				
 					<div class="m-form m-form--fit m-form--label-align-right">
 						<div class="m-portlet__body">
 							<div class="form-group m-form__group row">
-								<label class="col-form-label col-lg-3 col-sm-12"><b>Jenis Nasabah</b> :</label>
-								<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill">
-									<select class="form-control m_select2_hiding" id="jenisNasabah" name="jenisNasabah">
+								<label class="col-form-label col-lg-3 col-sm-12"><b>Tipe Nasabah</b> :</label>
+								<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill ">
+									<select class="form-control m_select2_hiding" id="tipeNasabah" name="tipeNasabah">
 										<option value=""></option>
 										<option value="Tenaga Pendidik">Tenaga Pendidik</option>
 										<option value="Siswa">Siswa</option>
@@ -33,7 +34,7 @@
 							</div>
 							<div class="form-group m-form__group">
 								<label for="">No. Identitas/NIK</label>
-								<input type='text' class="form-control m-input m-input--air m_maxlength_1" maxlength="16" 
+								<input type='text' class="form-control m-input m-input--air m_maxlength_2" maxlength="16" 
 									placeholder="16 Digit NIK" id="NIK" name="NIK">
 								<span class="m-form__help">Isi dengan 16 digit No. NIK.</span>
 							</div>
@@ -45,7 +46,7 @@
 							<div class="form-group m-form__group">
 								<label for="">Jenis Kelamin</label>
 								<select class="form-control m-input m-input--air m-bootstrap-select m-bootstrap-select--air 
-									m-bootstrap-select--pill m_selectpicker">	
+									m-bootstrap-select--pill m_select2_hiding" name="JK" id="JK">	
 										<option value="">Pilih Jenis Kelamin</option>
 										<option value="Laki-Laki">Laki - Laki</option>
 										<option value="Perempuan">Perempuan</option>
@@ -60,7 +61,8 @@
 							</div>
 							<div class="form-group m-form__group">
 								<label for="exampleInputEmail1">No. Hp</label>
-								<input type="number" class="form-control m-input m-input--air" placeholder="No. Hp / WA Nasabah">
+								<input type="text" class="form-control m-input m-input--air m_maxlength_2" name="noHP" id="noHP" 
+									maxlength="14" placeholder="No. Hp / WA Nasabah">
 								<span class="m-form__help">Isi dengan No. HP / WA Nasabah</span>
 							</div>
 							<div class="form-group m-form__group">
@@ -82,7 +84,7 @@
 							
 						</div>
 					</div>
-				</form>
+				
 				<!--end::Form-->
 			</div>
 			<div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
@@ -102,14 +104,14 @@
 				<div class="m-form m-form--fit m-form--label-align-right">
 					<div class="m-portlet__body">
 					<div class="form-group m-form__group">
-						<button type="button" class="btn m-btn--square  m-btn m-btn--gradient-from-success m-btn--gradient-to-accent" 
-							data-toggle="modal" data-target="#modalSimpan">
-                    		<i class="la flaticon-interface-5"></i> Simpan Data
-                		</button>	
                 		<button type="button" class="btn m-btn--square  m-btn m-btn--gradient-from-danger m-btn--gradient-to-warning" 
                 			id="btnAddTenpen">
                     		<i class="la flaticon-close"></i> Batalkan
                			 </button>
+						<button type="button" class="btn m-btn--square  m-btn m-btn--gradient-from-success m-btn--gradient-to-accent" 
+							data-toggle="modal" data-target="#modalSimpan">
+                    		<i class="la flaticon-interface-5"></i> Simpan Data
+                		</button>	
 					</div>
 						
 						
@@ -195,17 +197,17 @@
 					<div class="m-portlet__body">
 						<div class="form-group m-form__group row">
 							<label class="col-form-label col-lg-3 col-sm-12"><b>Jenis Rekening</b> :</label>
-							<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill">
-								<select class="form-control m_select2_hiding" id="" name="jenisNasabah">
-									<option value="">Pilih Jenis Rekening</option>
+							<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill inputBlock">
+								<select class="form-control m_select2_hiding" id="jenisRekening" name="jenisRekening">
+									<option value=""></option>
 									<?php foreach ($listJenisRekening as $jenis): ?>
 										<option value="<?= $jenis->idJenis_rekening ?>"><?= $jenis->nama_jenis_rekening ?></option>
 									<?php endforeach; ?>
-									
 								</select>
 								<span class="m-form__help">Tentukan Jenis Rekening.</span>
 							</div>
 						</div>
+						<div id="pilihJangkaSimpanan"></div>
 						<div class="form-group m-form__group">
 							<label for="">Tujuan Pembukaan</label>
 							<textarea class="form-control m-input m-input--air" id="tujuanPembukaan" name="tujuanPembukaan" rows="4">
@@ -220,8 +222,10 @@
 			</div>
 		</div>
 		<!--END FORM DATA JENIS REKENING-->
+		
 	</div>
 </div>
+</form>
 
 <div class="modal fade modalInput" id="modalSimpan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
@@ -305,11 +309,43 @@
 <script src="<?= base_url('assets/js/demo/select2.js') ?>"></script>
 <script src="<?= base_url('assets/js/demo/bootstrap-datepicker.js') ?>"></script>
 <script>
+//INPUT BLOCK------------------------------------------
+  function inputBlock() {
+      mApp.block(".inputBlock", {
+              overlayColor: "#000000",
+              type: "loader",
+              state: "primary",
+              message: "Memeriksa & Mengirim Paramater..."
+          });
+  }
+//-----------------------------------------------------
+
+$(document).on('change', '#jenisRekening', function (e) {
+	mApp.block(".inputBlock");
+	$jenisRekening = $('#jenisRekening').val();
+	$.ajax({
+		url: '<?= base_url('customer/registration/cekJenisRekening') ?>',
+		type : 'POST',
+		//async: true,
+		//dataType: '',
+		data: {jenisRekening : $jenisRekening},
+		success: function (response) {
+			$('#pilihJangkaSimpanan').html(response).fadeIn('slow');
+			mApp.unblock(".inputBlock");
+		}
+	})
+
+});
+
+
+
 var registerAlert = {
     init: function() {
          $("#btnSimpan").click(function(e) {
-         	if($('#jenisNasabah').val()=="" || $('#namaNasabah').val()=="" || $('#NIK').val()==""){
+         	modalBlockLoad()
+         	if($('#tipeNasabah').val()=="" || $('#namaNasabah').val()=="" || $('#NIK').val()=="" || $('#JK').val()=="" || $('#noHP').val()=="" || $('#tempatLahir').val()=="" || $('#tanggalLahir').val()==""){
          		toastr.error("Terdapat parameter wajib yang tidak boleh kosong!", "Gagal Mengirim");
+         		mApp.unblock(".modalInput");
          	}else{
 	            swal({
 	                title: "Anda Yakin Untuk Menyimpan?",
@@ -321,7 +357,7 @@ var registerAlert = {
 	            }).then(function(e) {
 	            	var data = $('#formRegisterNasabah').serialize();
 	            	$.ajax({
-	            		url: '<?= base_url('customer/registration/addcustomer') ?>',
+	            		url: '<?= base_url('customer/registration/addCustomer') ?>',
 	            		type: 'POST',
 	            		dataType: 'json',
 	            		data: data,
@@ -331,6 +367,7 @@ var registerAlert = {
 							}
 						},
 	            		success: function(response){
+	            			mApp.unblock(".modalInput");
 	            			// $('#resultAddNasabah').html(result).show();
 	            			if(response.status == 'sukses'){
 	            				swal({
@@ -347,6 +384,7 @@ var registerAlert = {
 					                }
 					            });
 	            			}else{
+	            				mApp.unblock(".modalInput");
 	            				$('#resultAddNasabah').html(response.pesan).show()
 	            			}
 	            		}

@@ -109,7 +109,7 @@
 
 //MODAL BLOCK LOAD------------------------------------------
   function modalBlockLoad() {
-      mApp.block(".modalInput .modal-content", {
+      mApp.block(".modalInput", {
               overlayColor: "#000000",
               type: "loader",
               state: "primary",

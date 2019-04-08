@@ -248,13 +248,17 @@ class Config extends CI_Controller {
 		$crud = new grocery_CRUD();
 		$crud->set_theme('datatables');
 		$crud->set_table('settings');
-		$crud->set_subject('Settings');
+		$crud->set_subject('Pengaturan Aplikasi');
 		$crud->set_field_upload('logo','assets/image');
 		$crud->columns('logo','judul','npsn','instansi','alamat','versi');
 		$crud->unset_add();
 		$crud->unset_delete();
 		$crud->unset_export();
 		$crud->unset_print();
+
+		$crud->required_fields('judul', 'npsn');
+		$crud->callback_column('judul',array($this,'judul_callback'));
+		$crud->callback_column('npsn',array($this,'npsn_callback'));
 
 		$output = $crud->render();
 		$data['judul'] = "Settings";
@@ -263,6 +267,16 @@ class Config extends CI_Controller {
 		$template = 'admin_template';
 		$view = 'grocery';
 		$this->outputview->output_admin($view, $template, $data, $output);
+	}
+
+	function judul_callback($value = '', $primary_key = null){
+		$value = '<b>'.$value.'</b>';
+		return $value;
+	}
+
+	function npsn_callback($value = '', $primary_key = null){
+		$value = '<b>'.$value.'</b>';
+		return $value;
 	}
 
 	public function header_menu()
