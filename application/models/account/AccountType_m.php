@@ -19,12 +19,8 @@ class AccountType_m extends CI_Model {
 	public function getKodeJenisRekening(){
 		$this->db->select('MAX(idJenis_rekening) as kodrek', FALSE);
 		$this->db->from('jenis_rekening');
-		#$this->db->order_by('idJenis_rekening', 'desc');
-		#$this->db->limit(1);
 		$query = $this->db->get();
 		if($query->num_rows() > 0 ){
-			#$data 	= $query->row();
-			#$kodrek = intval($data->kodrek) + 1;
 			foreach($query->result() as $k){
                 $tmp = ((int)$k->kodrek)+1;
                 $kodrek = sprintf("%04s", $tmp);
