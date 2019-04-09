@@ -45,7 +45,7 @@
 	<body  class="m--skin- m-header--fixed  m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
-			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin" id="m_login" 
+			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-login m-login--1 m-login--signin" id="m_login" 
 			style="background-image: url(<?= base_url('assets/image/bg/bg-3.jpg') ?>);">
 				<div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
 					<div class="m-stack m-stack--hor m-stack--desktop">
@@ -59,7 +59,9 @@
 								<div class="m-login__signin">
 									<div class="m-login__head">
 										<h3 class="m-login__title">
-											Masuk Ke <?= $title ?>
+											<?= $settings->instansi ?><br>
+											<small class="">Sistem Tabungan Sekolah</small><br>
+											<small class="">Versi <?= $settings->versi ?></small>
 										</h3>
 									</div>
 									
