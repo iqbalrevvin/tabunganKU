@@ -1,6 +1,7 @@
 tabunganKU
 =========
-Sistem Tabungan Sekolah Masa Kini.<br>
-Framework : Codeigniter v3<br>
-Powered By : Metronic Template, Grocery CRUD, Ion Auth & MyIgniter Menu Generator 
-
+Sistem Tabungan Sekolah Masa Kini.<hr>
+<b>Bulid By</b><br>
+Framework : Codeigniter V3<br>
+Library : GroceryCRUD, Ion Auth, OutputView, Menu Management<br>
+Template : Metronic View6
