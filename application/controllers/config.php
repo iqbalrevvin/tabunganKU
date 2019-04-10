@@ -56,8 +56,7 @@ class Config extends CI_Controller {
     	$crud->display_as('password_confirm','Konfirmasi Kata Sandi');
     	$crud->display_as('old_password','Kata Sandi Lama');
     	$crud->display_as('new_password', 'Kata Sandi Baru');
-    	if ($this->uri->segment(3) !== 'read')
-		{
+    	if ($this->uri->segment(3) !== 'read'){
 	    	$crud->add_fields('identity_number','first_name', 'last_name', 'place_of_birth', 'date_of_birth', 'email', 'phone','groups' ,'username', 'password', 'password_confirm');
 			$crud->edit_fields('username','first_name', 'last_name' , 'place_of_birth', 'date_of_birth', 'email', 'phone','groups' , 'last_login','old_password','new_password');
 		}else{
@@ -109,7 +108,6 @@ class Config extends CI_Controller {
 		$crud->set_subject('Hak Akses');
 		$crud->display_as('name', 'Nama Hak Akses');
 		$crud->display_as('description', 'Deskripsi');
-
 		//VIEW
 		$output = $crud->render();
 		$data['judul'] = 'Groups';

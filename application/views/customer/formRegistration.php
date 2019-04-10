@@ -11,7 +11,7 @@
 								<i class="flaticon-user-add"></i>
 							</span>
 							<h3 class="m-portlet__head-text">
-								FORM DATA NASABAH <?= $norek ?>
+								FORM DATA NASABAH 
 							</h3>
 						</div>
 					</div>
@@ -45,7 +45,7 @@
 							</div>
 							<div class="form-group m-form__group">
 								<label for="">Jenis Kelamin</label>
-								<select class="form-control m-input m-input--air m-bootstrap-select m-bootstrap-select--air 
+								<select class="form-control m-input m-bootstrap-select m-bootstrap-select--air 
 									m-bootstrap-select--pill m_select2_hiding" name="JK" id="JK">	
 										<option value="">Pilih Jenis Kelamin</option>
 										<option value="Laki-Laki">Laki - Laki</option>
@@ -153,26 +153,42 @@
 						</div>
 						<div class="form-group m-form__group">
 							<label for="">Desa</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_1" maxlength="50" 
-								placeholder="Desa Nasabah" id="desa" name="desa">
+							<select class="form-control m_select2_hiding" id="desa" name="desa">
+								<option value=""></option>
+								<?php foreach ($desa as $data): ?>
+									<option value="<?= $data->nama_desa ?>"><?= $data->nama_desa ?></option>
+								<?php endforeach; ?>
+							</select>
 							<span class="m-form__help">Isi dengan alamat desa nasabah</span>
 						</div>
 						<div class="form-group m-form__group">
 							<label for="">Kecamatan</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_1" id="" maxlength="50" 
-								placeholder="Kecamatan Nasabah" id="kecamatan" name="kecamatan">
+							<select class="form-control m_select2_hiding" id="kecamatan" name="kecamatan">
+								<option value=""></option>
+								<?php foreach ($kecamatan as $data): ?>
+									<option value="<?= $data->nama_kecamatan ?>"><?= $data->nama_kecamatan ?></option>
+								<?php endforeach; ?>
+							</select>
 							<span class="m-form__help">Isi dengan alamat kecamatan nasabah</span>
 						</div>
 						<div class="form-group m-form__group">
 							<label for="">Kab/Kota</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_1" maxlength="50" 
-								placeholder="Kab/Kota Nasabah" id="kota" name="kota">
+							<select class="form-control m_select2_hiding" id="kabupaten" name="kabupaten">
+								<option value=""></option>
+								<?php foreach ($kabupaten as $data): ?>
+									<option value="<?= $data->nama_kabupaten ?>"><?= $data->nama_kabupaten ?></option>
+								<?php endforeach; ?>
+							</select>
 							<span class="m-form__help">Isi dengan Kabupaten/Kota nasabah</span>
 						</div>
 						<div class="form-group m-form__group">
 							<label for="">Provinsi</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_1" id="" maxlength="50" 
-								placeholder="Provinsi Nasabah" id="provinsi" name="provinsi">
+							<select class="form-control m_select2_hiding" id="provinsi" name="provinsi">
+								<option value=""></option>
+								<?php foreach ($provinsi as $data): ?>
+									<option value="<?= $data->nama_provinsi ?>"><?= $data->nama_provinsi ?></option>
+								<?php endforeach; ?>
+							</select>
 							<span class="m-form__help">Isi dengan Provinsi nasabah</span>
 						</div>
 					</div>
@@ -215,14 +231,12 @@
 							</textarea>
 							<span class="m-form__help">Isi dengan tujuan pembukaan rekening</span>
 						</div>
-					
 					</div>
 				</div>
 				<!--end::Form-->
 			</div>
 		</div>
-		<!--END FORM DATA JENIS REKENING-->
-		
+		<!--END FORM DATA JENIS REKENING-->	
 	</div>
 </div>
 </form>
