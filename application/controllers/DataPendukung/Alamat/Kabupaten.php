@@ -23,7 +23,7 @@ class Kabupaten extends CI_Controller {
 		/*------------*/
 
 		/*CALLBACK*/
-		$crud->callback_column('nama_kabupaten',array($this,'kabupaten_callback'));
+		#$crud->callback_column('nama_kabupaten',array($this,'kabupaten_callback'));
 		/*--------------*/
 
 
@@ -36,10 +36,10 @@ class Kabupaten extends CI_Controller {
 		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
-	function kabupaten_callback($value, $primary_key = null){
+	/*function kabupaten_callback($value, $primary_key = null){
 		$value = '<b>'.$value.'</b>';
 		return $value;
-	}
+	}*/
 
 	
 }

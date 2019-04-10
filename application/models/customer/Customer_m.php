@@ -30,10 +30,6 @@ class Customer_m extends CI_Model {
 		return $nomerRekening;
 	}
 
-	function getSaldoAwal(){
-
-	}
-
 	function getJangkaSimpanan($jenisRekening){
 		$query = $this->db->get_where('jenis_rekening', array('idJenis_rekening' => $jenisRekening));
 		return $query->row();
@@ -54,6 +50,14 @@ class Customer_m extends CI_Model {
 
 	public function addRekeningNasabah($rekening){
 		$this->db->insert('rekening_nasabah', $rekening);
+	}
+
+	public function addDetailSiswa($detailNasabah){
+		$this->db->insert('detail_siswa', $detailNasabah);
+	}
+
+	public function addDetailTenpen($detailNasabah){
+		$this->db->insert('detail_tenaga_pendidik', $detailNasabah);
 	}
 
 }

@@ -73,20 +73,6 @@
 	<!-- END EXAMPLE TABLE PORTLET-->
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
 	var validation_url = '<?php echo $validation_url?>';
 	var list_url = '<?php echo $list_url?>';

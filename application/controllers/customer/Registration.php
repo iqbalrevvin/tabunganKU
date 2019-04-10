@@ -6,8 +6,12 @@ class Registration extends CI_Controller {
 		$this->load->library('OutputView');
 		$this->load->model('customer/Customer_m');
 		$this->load->model('other/GetAlamat_m');
+		$this->load->model('other/GetKelas_m');
+		$this->load->model('other/GetProdi_m');
+		$this->load->model('other/GetJabatan_m');
 	}
 
+	/*HALAMAN AWAL REGISTRASI NASABAH*/
 	public function index(){
 		#$data['listJenisRekening'] 	= $jenisRekening;
 		$data['judul'] 					= 'PENDAFTARAN NASABAH';
@@ -19,7 +23,26 @@ class Registration extends CI_Controller {
 
 		$this->outputview->output_admin($view, $template, $data);
 	}
+	/*-------------------------------------------------------------------------*/
 
+	/*DETAIL NASABAH SAAT MEMILIH JENIS NASABAH*/
+	function cekTipeNasabah(){
+		$tipeNasabah 	= $this->input->post('tipeNasabah');
+		$getProdi 		= $this->GetProdi_m->getProdi();
+		$getKelas 		= $this->GetKelas_m->getKelas();
+		$getJabatan 	= $this->GetJabatan_m->getJabatan();
+		$data = [
+		    'tipeNasabah' 	=> $tipeNasabah, 
+		    'prodi' 		=> $getProdi,
+		    'kelas' 		=> $getKelas,
+		    'jabatan' 		=> $getJabatan
+		];
+
+		$this->load->view('customer/selectDetailNasabah', $data);
+	}
+	/*-------------------------------------------------------------------------*/
+
+	/*CEK JENIS TABUNGAN BERJANGKA SAAT MEMILIH JENIS REKENING*/
 	function cekJenisRekening(){
 		$jenisRekening 				= $this->input->post('jenisRekening');
 		$getJenisSimpanan 			= $this->Customer_m->getJangkaSimpanan($jenisRekening);
@@ -29,7 +52,9 @@ class Registration extends CI_Controller {
 		];
 		$this->load->view('customer/selectJangkaSimpanan', $data);
 	}
+	/*----------------------------------------------------------------------------------*/
 
+	/*INTERFACE FROM REGISTRASI NASABAH*/
 	public function formRegisterView(){
 		$jenisRekening 					= $this->Customer_m->listJenisRekening();
 		$data['desa'] 					= $this->GetAlamat_m->desa();
@@ -41,7 +66,9 @@ class Registration extends CI_Controller {
 
 		$this->load->view('customer/formRegistration', $data, FALSE);
 	}
+	/*--------------------------------------------------------------------------*/
 
+	/*INPUT DATA NASABAH*/
 	function addCustomer(){
 		$validate 		= $this->form_validation;
 		$validate->set_rules('NIK', 'NIK', 'min_length[16]|max_length[16]|numeric|is_unique[nasabah.no_identitas]');
@@ -54,7 +81,8 @@ class Registration extends CI_Controller {
 			    'pesan' 	=> 'Data Berhasil Disimpan' 
 			];
 			$i = $this->input;
-			//INSERT KE TABEL NASABAH
+
+			/*INSERT KE TABEL NASABAH*/
 			$data = [
 				'tipe_nasabah' 	=> $i->post('tipeNasabah'),
 				'no_identitas' 	=> $i->post('NIK'),
@@ -71,7 +99,9 @@ class Registration extends CI_Controller {
 				'provinsi' 		=> $i->post('provinsi')
 			];
 			$this->Customer_m->addCustomer($data);
-			//INSERT KE TABEL REKENING NASABAH
+
+
+			/*INSERT KE TABEL REKENING*/
 			$norek 			= $this->Customer_m->getNomorRekeningNasabah();
 			$session 		= $this->ion_auth->user()->row(); 
 			$rekening = [
@@ -86,6 +116,25 @@ class Registration extends CI_Controller {
 				'petugas' 					=> $session->first_name
 			];
 			$this->Customer_m->addRekeningNasabah($rekening);
+
+			/*INSERT KE TABEL DETAIL NASABAH*/
+				
+			
+
+			if($i->post('tipeNasabah') == 'Siswa'):
+				$detailNasabah = [
+				    'no_identitas' => $i->post('NIK'),
+				    'idKelas' => $i->post('kelas') 
+				];
+				$this->Customer_m->addDetailSiswa($detailNasabah);
+			else:
+				$detailNasabah = [
+				    'no_identitas' 	=> $i->post('NIK'),
+				    'idJabatan' 	=> $i->post('jabatan')
+				];
+				$this->Customer_m->addDetailTenpen($detailNasabah);
+			endif;
+
 			//FLASH DATA
 			$this->session->set_flashdata('sukses', 'Data Nasabah Berhasil Ditambahkan');
 		}else{
@@ -96,6 +145,7 @@ class Registration extends CI_Controller {
 		}
 		echo json_encode($callback);
 	}
+	/*------------------------------------------------------------------------------------------------*/
 
 }
 

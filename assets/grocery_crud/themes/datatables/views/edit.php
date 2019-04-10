@@ -19,13 +19,13 @@
 			</div>
 		
 		</div>
-
-		    <!--iki tampil table'e-->
+	
 		<div class="m-portlet__body">
 			<div class="flexigrid crud-form box" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
 				<div class="box-header with-border">
 					<!--<h3 class="box-title"><i class="fa fa-pencil fa-fw"></i> <?php echo $this->l('form_edit'); ?> <?php echo $subject?></h3>-->
 				</div>
+				
 				<div id='main-table-box' class="box-body">
 					<?php echo form_open( $update_url, 'method="post" class="form-horizontal" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
 
@@ -54,13 +54,13 @@
 					<!-- End of hidden inputs -->
 					<?php }?>
 					<?php if ($is_ajax) { ?><input type="hidden" name="is_ajax" value="true" /><?php }?>
-					<div id='report-error' class='report-div error alert alert-danger' role="alert"></div>
+					<div id='report-error' class='report-div error alert alert-danger alert-dismissible fade show' role="alert"></div>
 					<div id='report-success' class='report-div success alert alert-success'></div>
 
-					<button  id="form-button-save" type='submit' class="btn btn-primary"/><?php echo $this->l('form_update_changes'); ?></button>
+					<button  id="form-button-save" type='submit' class="btn btn-accent m-btn m-btn--air m-btn--custom"/><?php echo $this->l('form_update_changes'); ?></button>
 					<?php 	if(!$this->unset_back_to_list) { ?>
-					<button type='button' id="save-and-go-back-button" class="btn btn-info"/><?php echo $this->l('form_update_and_go_back'); ?></button>
-					<button type='button' class="btn btn-default" id="cancel-button" /><?php echo $this->l('form_cancel'); ?></button>
+					<button type='button' id="save-and-go-back-button" class="btn btn-info m-btn m-btn--air m-btn--custom"/><?php echo $this->l('form_update_and_go_back'); ?></button>
+					<button type='button' class="btn btn-danger m-btn m-btn--air m-btn--custom" id="cancel-button" /><?php echo $this->l('form_cancel'); ?></button>
 					<?php 	} ?>
 					<span class='small-loading' id='FormLoading'><img src="<?php echo base_url('assets/svg/loading-spin-primary.svg') ?>" alt="loading..."> <?php echo $this->l('form_update_loading'); ?></span>
 				<?php echo form_close(); ?>

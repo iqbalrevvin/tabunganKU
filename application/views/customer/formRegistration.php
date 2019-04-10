@@ -22,16 +22,16 @@
 						<div class="m-portlet__body">
 							<div class="form-group m-form__group row">
 								<label class="col-form-label col-lg-3 col-sm-12"><b>Tipe Nasabah</b> :</label>
-								<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill ">
+								<div class="col-lg-6 col-md-9 col-sm-12 m-select2 m-select2--air m-select2--pill inputBlock">
 									<select class="form-control m_select2_hiding" id="tipeNasabah" name="tipeNasabah">
 										<option value=""></option>
 										<option value="Tenaga Pendidik">Tenaga Pendidik</option>
 										<option value="Siswa">Siswa</option>
-										<option value="Alumni">Alumni</option>
 									</select>
 									<span class="m-form__help">Tentukan Jenis Nasabah.</span>
 								</div>
 							</div>
+							<div id="detailNasabah"></div>
 							<div class="form-group m-form__group">
 								<label for="">No. Identitas/NIK</label>
 								<input type='text' class="form-control m-input m-input--air m_maxlength_2" maxlength="16" 
@@ -144,12 +144,6 @@
 							<input type='text' class="form-control m-input m-input--air m_maxlength_1" maxlength="100" 
 								placeholder="Alamat Nasabah" id="alamat" name="alamat">
 							<span class="m-form__help">Isi dengan alamat jalan nasabah</span>
-						</div>
-						<div class="form-group m-form__group">
-							<label for="">RT/RW</label>
-							<input type='text' class="form-control m-input m-input--air m_maxlength_1" maxlength="5" 
-								placeholder="RT/RW Nasabah" id="rtrw" name="rtrw">
-							<span class="m-form__help">Contoh : 02/01</span>
 						</div>
 						<div class="form-group m-form__group">
 							<label for="">Desa</label>
@@ -323,7 +317,8 @@
 <script src="<?= base_url('assets/js/demo/select2.js') ?>"></script>
 <script src="<?= base_url('assets/js/demo/bootstrap-datepicker.js') ?>"></script>
 <script>
-//INPUT BLOCK------------------------------------------
+
+/*INPUT BLOCK*/
   function inputBlock() {
       mApp.block(".inputBlock", {
               overlayColor: "#000000",
@@ -334,6 +329,25 @@
   }
 //-----------------------------------------------------
 
+/*PILIHAN UNTUK DETAIL NASABAH*/
+$(document).on('change', '#tipeNasabah', function (e) {
+	mApp.block(".inputBlock");
+	$tipeNasabah = $('#tipeNasabah').val();
+	$.ajax({
+		url: '<?= base_url('customer/registration/cekTipeNasabah') ?>',
+		type : 'POST',
+		//async: true,
+		//dataType: '',
+		data: {tipeNasabah : $tipeNasabah},
+		success: function (response) {
+			$('#detailNasabah').html(response).fadeIn('slow');
+			mApp.unblock(".inputBlock");
+		}
+	})
+});
+/*--------------------------------------------*/
+
+/*JANGKA SIMPANAN TIPE REKENING*/
 $(document).on('change', '#jenisRekening', function (e) {
 	mApp.block(".inputBlock");
 	$jenisRekening = $('#jenisRekening').val();
@@ -348,9 +362,8 @@ $(document).on('change', '#jenisRekening', function (e) {
 			mApp.unblock(".inputBlock");
 		}
 	})
-
 });
-
+/*------------------------------------------------------------------------------*/
 
 
 var registerAlert = {
@@ -368,41 +381,45 @@ var registerAlert = {
 	                showCancelButton: !0,
 	                confirmButtonText: "Ya, Lanjutkan!",
 	                cancelButtonText: "Batal"
-	            }).then(function(e) {
-	            	var data = $('#formRegisterNasabah').serialize();
-	            	$.ajax({
-	            		url: '<?= base_url('customer/registration/addCustomer') ?>',
-	            		type: 'POST',
-	            		dataType: 'json',
-	            		data: data,
-	            		beforeSend: function(e) {
-							if(e && e.overrideMimeType) {
-								e.overrideMimeType('application/jsoncharset=UTF-8')
-							}
-						},
-	            		success: function(response){
-	            			mApp.unblock(".modalInput");
-	            			// $('#resultAddNasabah').html(result).show();
-	            			if(response.status == 'sukses'){
-	            				swal({
-					                title: "Data Nasabah Berhasil Disimpan",
-					                text: "Anda Akan Dialihkan Ke Halaman Daftar Nasabah, Mohon Tunggu. . . ",
-					                type: "success",
-					                timer: 5e3,
-					                onOpen: function() {
-					                    swal.showLoading()
-					                    setTimeout(function () {
-					                        //$("#loading").hide();
-					                        refresh();
-					                    }, 1500);  
-					                }
-					            });
-	            			}else{
-	            				mApp.unblock(".modalInput");
-	            				$('#resultAddNasabah').html(response.pesan).show()
-	            			}
-	            		}
-	            	})
+	            }).then((result) => {
+            		if (result.value) {
+		            	var data = $('#formRegisterNasabah').serialize();
+		            	$.ajax({
+		            		url: '<?= base_url('customer/registration/addCustomer') ?>',
+		            		type: 'POST',
+		            		dataType: 'json',
+		            		data: data,
+		            		beforeSend: function(e) {
+								if(e && e.overrideMimeType) {
+									e.overrideMimeType('application/jsoncharset=UTF-8')
+								}
+							},
+		            		success: function(response){
+		            			mApp.unblock(".modalInput");
+		            			// $('#resultAddNasabah').html(result).show();
+		            			if(response.status == 'sukses'){
+		            				swal({
+						                title: "Data Nasabah Berhasil Disimpan",
+						                text: "Anda Akan Dialihkan Ke Halaman Daftar Nasabah, Mohon Tunggu. . . ",
+						                type: "success",
+						                timer: 5e3,
+						                onOpen: function() {
+						                    swal.showLoading()
+						                    setTimeout(function () {
+						                        //$("#loading").hide();
+						                        refresh();
+						                    }, 1500);  
+						                }
+						            });
+		            			}else{
+		            				mApp.unblock(".modalInput");
+		            				$('#resultAddNasabah').html(response.pesan).show()
+		            			}
+		            		}
+		            	})
+		            }else{
+		            	mApp.unblock(".modalInput");
+		            }
 	            })
 	        }
         })

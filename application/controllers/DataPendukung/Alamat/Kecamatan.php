@@ -23,7 +23,7 @@ class Kecamatan extends CI_Controller {
 		/*------------*/
 
 		/*CALLBACK*/
-		$crud->callback_column('nama_kecamatan',array($this,'kecamatan_callback'));
+		#$crud->callback_column('nama_kecamatan',array($this,'kecamatan_callback'));
 		/*--------------*/
 
 
@@ -36,10 +36,10 @@ class Kecamatan extends CI_Controller {
 		$this->outputview->output_admin($view, $template, $data, $output);
 	}
 
-	function kecamatan_callback($value, $primary_key = null){
+	/*function kecamatan_callback($value, $primary_key = null){
 		$value = '<b>'.$value.'</b>';
 		return $value;
-	}
+	}*/
 
 	
 }
