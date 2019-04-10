@@ -37,8 +37,6 @@ class AccountType extends CI_Controller {
 		$crud->callback_column('fitur_penarikan', array($this, 'fiturPenarikan_callback'));
 		$crud->callback_column('fitur_transfer', array($this, 'fiturTransfer_callback'));
 		$crud->callback_column('simpanan_berjangka', array($this, 'simpananBerjangka_callback'));
-
-		
     	
     	//GENERATE
     	$output 		= $crud->render();
@@ -46,9 +44,6 @@ class AccountType extends CI_Controller {
     	$data['crumb'] 	= array('Jenis Rekening' => '' );
     	$template 		= 'admin_template';
     	$view 			= 'grocery';
-
-    	
-    	
 
     	$this->outputview->output_admin($view, $template, $data, $output);
 
