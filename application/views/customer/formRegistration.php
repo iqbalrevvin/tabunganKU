@@ -220,9 +220,7 @@
 						<div id="pilihJangkaSimpanan"></div>
 						<div class="form-group m-form__group">
 							<label for="">Tujuan Pembukaan</label>
-							<textarea class="form-control m-input m-input--air" id="tujuanPembukaan" name="tujuanPembukaan" rows="4">
-								
-							</textarea>
+							<textarea class="form-control m-input m-input--air" id="tujuanPembukaan" name="tujuanPembukaan" rows="4"></textarea>
 							<span class="m-form__help">Isi dengan tujuan pembukaan rekening</span>
 						</div>
 					</div>
