@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Customer_m extends CI_Model {
+class Nasabah_m extends CI_Model {
 
 	public function __construct(){
 		parent::__construct();
@@ -60,7 +60,8 @@ class Customer_m extends CI_Model {
 		$this->db->insert('detail_tenaga_pendidik', $detailNasabah);
 	}
 
+
 }
 
-/* End of file Customer_m.php */
-/* Location: ./application/models/cutomer/Customer_m.php */
+/* End of file Nasabah_m.php */
+/* Location: ./application/modules/Nasabah/models/Nasabah_m.php */

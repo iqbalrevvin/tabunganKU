@@ -1,10 +1,12 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Registration extends CI_Controller {
+class Registrasi extends CI_Controller {
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('OutputView');
-		$this->load->model('customer/Customer_m');
+		$this->load->model('Nasabah_m');
 		$this->load->model('other/GetAlamat_m');
 		$this->load->model('other/GetKelas_m');
 		$this->load->model('other/GetProdi_m');
@@ -16,7 +18,7 @@ class Registration extends CI_Controller {
 		#$data['listJenisRekening'] 	= $jenisRekening;
 		$data['judul'] 					= 'PENDAFTARAN NASABAH';
 		$template 						= 'admin_template';
-		$view 							= 'customer/registration.php';
+		$view 							= 'Registrasi/registrasi.php';
 		// $data['crumb']	 				= [
 		//     								'Pendaftaran Nasabah' => ''
 		// 								  ];
@@ -38,25 +40,25 @@ class Registration extends CI_Controller {
 		    'jabatan' 		=> $getJabatan
 		];
 
-		$this->load->view('customer/selectDetailNasabah', $data);
+		$this->load->view('Registrasi/selectDetailNasabah', $data);
 	}
 	/*-------------------------------------------------------------------------*/
 
 	/*CEK JENIS TABUNGAN BERJANGKA SAAT MEMILIH JENIS REKENING*/
 	function cekJenisRekening(){
 		$jenisRekening 				= $this->input->post('jenisRekening');
-		$getJenisSimpanan 			= $this->Customer_m->getJangkaSimpanan($jenisRekening);
+		$getJenisSimpanan 			= $this->Nasabah_m->getJangkaSimpanan($jenisRekening);
 		$data = [
 		    'jangkaSimpan' => $getJenisSimpanan,
 		    'jenis' => $jenisRekening
 		];
-		$this->load->view('customer/selectJangkaSimpanan', $data);
+		$this->load->view('Registrasi/selectJangkaSimpanan', $data);
 	}
 	/*----------------------------------------------------------------------------------*/
 
 	/*INTERFACE FROM REGISTRASI NASABAH*/
 	public function formRegisterView(){
-		$jenisRekening 					= $this->Customer_m->listJenisRekening();
+		$jenisRekening 					= $this->Nasabah_m->listJenisRekening();
 		$data['desa'] 					= $this->GetAlamat_m->desa();
 		$data['kecamatan'] 				= $this->GetAlamat_m->kecamatan();
 		$data['kabupaten'] 				= $this->GetAlamat_m->kabupaten();
@@ -64,7 +66,7 @@ class Registration extends CI_Controller {
 		$data['listJenisRekening'] 		= $jenisRekening;
 		$data['judul'] 					= 'PENDAFTARAN NASABAH';
 
-		$this->load->view('customer/formRegistration', $data, FALSE);
+		$this->load->view('Registrasi/formRegistrasi', $data, FALSE);
 	}
 	/*--------------------------------------------------------------------------*/
 
@@ -98,11 +100,11 @@ class Registration extends CI_Controller {
 				'kabupaten' 	=> $i->post('kabupaten'),
 				'provinsi' 		=> $i->post('provinsi')
 			];
-			$this->Customer_m->addCustomer($data);
+			$this->Nasabah_m->addCustomer($data);
 
 
 			/*INSERT KE TABEL REKENING*/
-			$norek 			= $this->Customer_m->getNomorRekeningNasabah();
+			$norek 			= $this->Nasabah_m->getNomorRekeningNasabah();
 			$session 		= $this->ion_auth->user()->row(); 
 			$rekening = [
 			    'nomor_rekening' 			=> $norek,
@@ -115,7 +117,7 @@ class Registration extends CI_Controller {
 				'saldo_akhir' 				=> $i->post('setorAwal'),
 				'petugas' 					=> $session->first_name
 			];
-			$this->Customer_m->addRekeningNasabah($rekening);
+			$this->Nasabah_m->addRekeningNasabah($rekening);
 
 			/*INSERT KE TABEL DETAIL NASABAH*/
 				
@@ -126,13 +128,13 @@ class Registration extends CI_Controller {
 				    'no_identitas' => $i->post('NIK'),
 				    'idKelas' => $i->post('kelas') 
 				];
-				$this->Customer_m->addDetailSiswa($detailNasabah);
+				$this->Nasabah_m->addDetailSiswa($detailNasabah);
 			else:
 				$detailNasabah = [
 				    'no_identitas' 	=> $i->post('NIK'),
 				    'idJabatan' 	=> $i->post('jabatan')
 				];
-				$this->Customer_m->addDetailTenpen($detailNasabah);
+				$this->Nasabah_m->addDetailTenpen($detailNasabah);
 			endif;
 
 			//FLASH DATA
@@ -149,5 +151,5 @@ class Registration extends CI_Controller {
 
 }
 
-/* End of file Registration.php */
-/* Location: ./application/controllers/customer/Registration.php */
+/* End of file Registrasi.php */
+/* Location: ./application/modules/Nasabah/controllers/Registrasi.php */

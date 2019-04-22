@@ -30,7 +30,7 @@
 		formRegisterView()
 		function formRegisterView(){
           $.ajax({
-              url: '<?= base_url('customer/registration/formregisterview') ?>',
+              url: '<?= base_url('Nasabah/Registrasi/formRegisterView') ?>',
               type: 'POST',
               async: true,
               data:{

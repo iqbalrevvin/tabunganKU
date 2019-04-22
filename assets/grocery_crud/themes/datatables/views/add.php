@@ -7,7 +7,7 @@
 	//$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 ?>
-<div class="box-body flexigrid"  data-unique-hash="<?php echo $unique_hash; ?>">	
+<div class="m-content box-body flexigrid"  data-unique-hash="<?php echo $unique_hash; ?>">	
 	<div class="m-portlet m-portlet--mobile">
 		<div class="m-portlet__head">
 			<div class="m-portlet__head-caption">

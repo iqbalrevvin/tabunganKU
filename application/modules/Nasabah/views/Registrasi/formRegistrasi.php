@@ -332,7 +332,7 @@ $(document).on('change', '#tipeNasabah', function (e) {
 	mApp.block(".inputBlock");
 	$tipeNasabah = $('#tipeNasabah').val();
 	$.ajax({
-		url: '<?= base_url('customer/registration/cekTipeNasabah') ?>',
+		url: '<?= base_url('Nasabah/Registrasi/cekTipeNasabah') ?>',
 		type : 'POST',
 		//async: true,
 		//dataType: '',
@@ -350,7 +350,7 @@ $(document).on('change', '#jenisRekening', function (e) {
 	mApp.block(".inputBlock");
 	$jenisRekening = $('#jenisRekening').val();
 	$.ajax({
-		url: '<?= base_url('customer/registration/cekJenisRekening') ?>',
+		url: '<?= base_url('Nasabah/Registrasi/cekJenisRekening') ?>',
 		type : 'POST',
 		//async: true,
 		//dataType: '',
@@ -383,7 +383,7 @@ var registerAlert = {
             		if (result.value) {
 		            	var data = $('#formRegisterNasabah').serialize();
 		            	$.ajax({
-		            		url: '<?= base_url('customer/registration/addCustomer') ?>',
+		            		url: '<?= base_url('Nasabah/Registrasi/addCustomer') ?>',
 		            		type: 'POST',
 		            		dataType: 'json',
 		            		data: data,
@@ -455,9 +455,6 @@ var BootstrapDatepicker = function() {
       }
   }
 }();
-
-
-
 
 jQuery(document).ready(function() {
     registerAlert.init()

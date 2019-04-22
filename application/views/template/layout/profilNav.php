@@ -31,9 +31,6 @@
                         <a href="#" class="m-card-user__email m--font-weight-300 m-link">
                             <?= $session->email ?>
                         </a>
-                        <span class="m-card-user__name m--font-weight-400">
-                            -<?= $levelAkses->name ?>-
-                        </span>
                     </div>
                 </div>
             </div>
